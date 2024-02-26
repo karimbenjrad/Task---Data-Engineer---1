@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  sales-postgres:
+    image: postgres:12.2
+    volumes:
+      - ./sales_table_init.sql:/docker-entrypoint-initdb.d/file_handler.sql
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=sales
+    container_name: sales-postgres
+
+  sales-pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8006:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "root@root.root"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    container_name: sales-pgadmin
+    depends_on:
+      - sales-postgres
+
+  sales-microservice:
+    build: .
+    ports:
+      - "8003:8000"
+    environment:
+      DB_HOST: sales-postgres
+      DB_PORT: "5432"
+      DB_NAME: "sales"
+      DB_USER: "root"
+      DB_PASSWORD: "root"
+      DB_FILE_TABLE: "files"
+      SSL_MODE: "allow"
+      PORT: 8000
+      DEFAULT_PROVIDER: "AzureBlobStorageProvider"
+      BLOB_ENDPOINT: "http://azurite:10000/devstoreaccount1"
+
+    container_name: sales-microservice
+    depends_on:
+      - sales-postgres

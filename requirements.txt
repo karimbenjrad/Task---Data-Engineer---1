@@ -3,4 +3,7 @@ SQLAlchemy==1.4.51
 uvicorn==0.27.1
 fastapi==0.109.2
 pydantic-settings==2.2.1
-
+pandas==2.0.3
+python-multipart==0.0.9
+psycopg2-binary~=2.9.1
+loguru==0.7.2
