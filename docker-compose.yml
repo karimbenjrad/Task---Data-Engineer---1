@@ -42,3 +42,12 @@ services:
     container_name: sales-microservice
     depends_on:
       - sales-postgres
+
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    command: "azurite-blob --loose --blobHost 0.0.0.0"
+    ports:
+      - "10000:10000"
+    container_name: azurite

@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from pydantic import Field
+from os import getenv
 
 
 class AppConfig(BaseSettings):
@@ -19,6 +20,17 @@ class CsvConfig(BaseSettings):
     CSV_DATA_PATH: str = Field(default="./files/", description="Port of the database", env="DB_PORT")
 
 
+class SettingsBlobStorage(BaseSettings):
+    ACCOUNT_NAME: str = Field(default='devstoreaccount1', env='AccountName')
+    ACCOUNT_KEY: str = Field(
+        default="Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==",
+        env='AccountKey')
+    ACCOUNT_URL: str = Field(
+        default='http://azurite:10000/devstoreaccount1',
+        env='AccountURL')
+
+
+setting_blob_storage = SettingsBlobStorage()
 csv_config = CsvConfig()
 data_base_config = DataBaseConfig()
 app_config = AppConfig()
