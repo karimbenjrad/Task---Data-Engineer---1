@@ -46,6 +46,11 @@ Also, one or more files can be uploaded via another REST api and all the files a
   - Ensures the application doesn't crash and provides meaningful error messages.
 
 ### Design Patterns
+- **Dependency Injector:**
+  - Utilized [Dependency Injector](https://github.com/ets-labs/python-dependency-injector) to manage dependencies in a clean and modular way.
+  - Enhances testability and maintainability by decoupling components.
+  - Promotes a structured approach to dependency management, making the codebase more organized and readable.
+
 - **Singleton Pattern:**
   - Implemented the singleton pattern in postgreSQL session instantiation.
   - Ensures only one instance of the class exists, promoting efficient resource utilization.
